@@ -1,4 +1,5 @@
 ip link add mynet link eth0 type macvlan mode bridge
+ip link add dockervlan link eth0 type macvlan mode bridge
 
 d@nginx:~/dev$ ip a
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
@@ -69,10 +70,10 @@ d@nginx:~/dev$ ip a
 d@nginx:~/dev$ 
 
 
-ip addr add 10.55.254.33/27 dev mynet
+sudo ip addr add 10.55.254.35/32 dev dockervlan
 
-ip route add 10.55.254.32/27 dev mynet
-
+sudo ip route add 10.55.254.32/27 dev dockervlan
+sudo ip link set dockervlan up
 
 d@nginx:~/dev$ sudo ip link set mynet up
 d@nginx:~/dev$ sudo ip route add 10.55.254.32/27 dev mynet
@@ -112,3 +113,14 @@ d@nginx:~/dev$ ip a
     inet6 fe80::6001:67ff:fe4e:9bb0/64 scope link 
        valid_lft forever preferred_lft forever
 d@nginx:~/dev$ 
+
+
+
+ip link add mynet link eth0 type macvlan mode bridge
+
+sudo ip link add dockervlan link eth0 type macvlan mode bridge
+
+sudo ip addr add 10.55.254.35/32 dev dockervlan
+sudo ip link set dockervlan up
+
+sudo ip route add 10.55.254.32/27 dev dockervlan

@@ -5,6 +5,7 @@ services:
     image: mysql:5.7
     volumes:
       - ./db_data:/var/lib/mysql
+    user: "mysql:mysql"
     restart: always
     container_name: mysql
     environment:
@@ -13,7 +14,9 @@ services:
       MYSQL_USER: wordpress
       MYSQL_PASSWORD: wordpress
     networks:
-      - dockervlan
+    #  - dockervlan
+      dockervlan:
+        ipv4_address: 10.55.254.36
 
   wordpress:
     image: wordpress:latest
@@ -35,9 +38,9 @@ services:
       WORDPRESS_DB_PASSWORD: wordpress
       WORDPRESS_DB_NAME: wordpress
     networks:
-      - dockervlan
-    #  dockervlan:
-    #    ipv4_address: 172.16.1.225
+    #  - dockervlan
+      dockervlan:
+        ipv4_address: 10.55.254.35
 
   phpmyadmin:
     depends_on:
