@@ -1,4 +1,12 @@
 <?php
+/** Enable W3 Total Cache */
+define('WP_CACHE', true); // Added by W3 Total Cache
+
+/** Enable Redis */
+define('WP_REDIS_PORT', 6379);
+define('WP_CACHE_KEY_SALT','ddbffb3cd0a6494208e15c7faebb6f503cdb84aa');
+define('WP_REDIS_HOST', 'redis');
+
 /**
  * The base configuration for WordPress
  *
@@ -140,3 +148,5 @@ define( 'W3TC_CONFIG_CACHE_REDIS_SERVERS', 'redis::6379' );
 define( 'W3TC_CONFIG_CACHE_REDIS_PERSISTENT', true );
 define( 'W3TC_CONFIG_CACHE_REDIS_DBID', 0 );
 define( 'W3TC_CONFIG_CACHE_REDIS_PASSWORD', '' );
+
+

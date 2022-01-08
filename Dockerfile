@@ -8,7 +8,7 @@ RUN set -x \
     && docker-php-ext-install ldap \
     && apt-get purge -y --auto-remove libldap2-dev
 
-# COPY wp-config.php /var/www/html/
+COPY wp-config.php /var/www/html/
 
 # COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 

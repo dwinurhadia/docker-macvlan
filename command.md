@@ -129,3 +129,37 @@ sudo ip route add 10.55.254.32/27 dev dockervlan
 ip addr add 172.16.1.220/32 dev dockerrouteif
 ip route add 172.16.1.224/27 dev dockerrouteif
 
+
+
+
+# fix permission directory
+mysql         | mysqld: Can't create/write to file '/var/lib/mysql/is_writable' (Errcode: 13 - Permission denied)
+
+sudo chmod -R 777 db_data
+
+d@nginx:~/dev$ docker-compose restart
+
+
+
+
+root@748d5b890f57:/data# redis-cli monitor
+OK
+
+d@nginx:~/dev$ docker-compose exec redis redis-cli monitor
+
+d@nginx:~/dev$ docker-compose exec redis redis-cli monitor
+OK
+1641655513.250456 [0 192.168.128.5:43580] "SELECT" "0"
+1641655513.250856 [0 192.168.128.5:43580] "PING"
+1641655513.251117 [0 192.168.128.5:43580] "INFO"
+1641655513.251901 [0 192.168.128.5:43580] "GET" "ddbffb3cd0a6494208e15c7faebb6f503cdb84aawp:default:is_blog_installed"
+1641655513.253655 [0 192.168.128.5:43580] "GET" "ddbffb3cd0a6494208e15c7faebb6f503cdb84aawp:options:notoptions"
+1641655513.253773 [0 192.168.128.5:43580] "GET" "ddbffb3cd0a6494208e15c7faebb6f503cdb84aawp:options:alloptions"
+1641655513.253969 [0 192.168.128.5:43580] "GET" "ddbffb3cd0a6494208e15c7faebb6f503cdb84aawp:site-options:1-notoptions"
+1641655513.256030 [0 192.168.128.5:43580] "GET" "ddbffb3cd0a6494208e15c7faebb6f503cdb84aawp:userlogins:admin"
+1641655513.256313 [0 192.168.128.5:43580] "GET" "ddbffb3cd0a6494208e15c7faebb6f503cdb84aawp:users:1"
+1641655513.256601 [0 192.168.128.5:43580] "GET" "ddbffb3cd0a6494208e15c7faebb6f503cdb84aawp:user_meta:1"
+1641655513.261832 [0 192.168.128.5:43580] "GET" "ddbffb3cd0a6494208e15c7faebb6f503cdb84aawp:options:can_compress_scripts"
+1641655513.266122 [0 192.168.128.5:43580] "GET" "ddbffb3cd0a6494208e15c7faebb6f503cdb84aawp:transient:doing_cron"
+1641655513.266992 [0 192.168.128.5:43580] "GET" "ddbffb3cd0a6494208e15c7faebb6f503cdb84aawp:site-transient:update_plugins"
+1641655513.267380 [0 192.168.128.5:43580] "GET" "ddbffb3cd0a6494208e15c7faebb6f503cdb84aawp:site-transient:update_themes"
