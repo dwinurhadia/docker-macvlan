@@ -124,3 +124,8 @@ sudo ip addr add 10.55.254.35/32 dev dockervlan
 sudo ip link set dockervlan up
 
 sudo ip route add 10.55.254.32/27 dev dockervlan
+
+
+ip addr add 172.16.1.220/32 dev dockerrouteif
+ip route add 172.16.1.224/27 dev dockerrouteif
+
