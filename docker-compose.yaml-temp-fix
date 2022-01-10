@@ -15,6 +15,8 @@ services:
       MYSQL_PASSWORD: wordpress
     networks:
       - backend
+      # dockervlan:
+      #   ipv4_address: 10.55.254.36
 
   wordpress:
     image: wordpress:latest
@@ -25,6 +27,7 @@ services:
     depends_on:
       - db
       - redis
+    #image: wordpress:latest
     volumes:
       - ./wordpress_data:/var/www/html
       - ${PWD}/wp-config.php:/var/www/html/wp-config.php
@@ -39,6 +42,10 @@ services:
     networks:
       - backend
       - dockervlan
+    # networks:
+    #   - dockervlan
+      # dockervlan:
+      #   ipv4_address: 10.55.254.35
 
   phpmyadmin:
     depends_on:
@@ -64,6 +71,10 @@ services:
         max-file: "3"
     ports:
       - "6379:6379"
+    # launch Redis in cache mode with :
+    #  - max memory up to 50% of your RAM if needed (--maxmemory 512mb)
+    #  - deleting oldest data when max memory is reached (--maxmemory-policy allkeys-lru)
+    # entrypoint: redis-server --maxmemory 512mb -maxmemory-policy allkeys-lru
     entrypoint: redis-server --maxmemory 512mb
     networks:
       - backend
@@ -75,7 +86,7 @@ volumes:
 networks:
   backend:
     driver : bridge
-
+    
   dockervlan:
     name: dockervlan
     driver: macvlan
@@ -83,6 +94,6 @@ networks:
       parent: eth0
     ipam:
       config:
-        - subnet: "10.55.254.0/24" # prefix network in your lan
-          ip_range: "10.55.254.40/32" # ip address usage to expose wordpress in public 
-          gateway: "10.55.254.254" # gateway network in your lan
+        - subnet: "10.55.254.0/24"
+          ip_range: "10.55.254.40/32"
+          gateway: "10.55.254.254"
