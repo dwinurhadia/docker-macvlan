@@ -13,8 +13,8 @@ services:
       MYSQL_DATABASE: wordpress
       MYSQL_USER: wordpress
       MYSQL_PASSWORD: wordpress
-    # networks:
-    #   - dockervlan
+    networks:
+      - backend
       # dockervlan:
       #   ipv4_address: 10.55.254.36
 
@@ -39,6 +39,9 @@ services:
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpress
       WORDPRESS_DB_NAME: wordpress
+    networks:
+      - backend
+      - dockervlan
     # networks:
     #   - dockervlan
       # dockervlan:
@@ -55,6 +58,8 @@ services:
     environment:
       PMA_HOST: db
       MYSQL_ROOT_PASSWORD: somewordpress
+    networks:
+      - backend
 
   redis:
     image: redis
@@ -71,19 +76,24 @@ services:
     #  - deleting oldest data when max memory is reached (--maxmemory-policy allkeys-lru)
     # entrypoint: redis-server --maxmemory 512mb -maxmemory-policy allkeys-lru
     entrypoint: redis-server --maxmemory 512mb
+    networks:
+      - backend
 
 volumes:
   db_data: {}
   wordpress_data: {}
 
-# networks:
-#   dockervlan:
-#     name: dockervlan
-#     driver: macvlan
-#     driver_opts:
-#       parent: eth0
-#     ipam:
-#       config:
-#         - subnet: "10.55.254.0/24"
-#           ip_range: "10.55.254.32/27"
-#           gateway: "10.55.254.254"
+networks:
+  backend:
+    driver : bridge
+    
+  dockervlan:
+    name: dockervlan
+    driver: macvlan
+    driver_opts:
+      parent: eth0
+    ipam:
+      config:
+        - subnet: "10.55.254.0/24"
+          ip_range: "10.55.254.40/32"
+          gateway: "10.55.254.254"
