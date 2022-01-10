@@ -37,8 +37,9 @@ services:
       WORDPRESS_DB_PASSWORD: wordpress
       WORDPRESS_DB_NAME: wordpress
     networks:
-      - backend
-      - dockervlan
+      backend:
+      dockervlan:
+        ipv4_address: "10.55.254.33"
 
   phpmyadmin:
     depends_on:
@@ -62,8 +63,8 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
-    ports:
-      - "6379:6379"
+    # ports:
+    #   - "6379:6379"
     entrypoint: redis-server --maxmemory 512mb
     networks:
       - backend
@@ -84,5 +85,5 @@ networks:
     ipam:
       config:
         - subnet: "10.55.254.0/24" # prefix network in your lan
-          ip_range: "10.55.254.40/32" # ip address usage to expose wordpress in public 
+          ip_range: "10.55.254.32/27" # ip address usage to expose wordpress in public 
           gateway: "10.55.254.254" # gateway network in your lan
