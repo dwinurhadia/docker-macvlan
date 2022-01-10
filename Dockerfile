@@ -10,10 +10,3 @@ RUN set -x \
 
 COPY wp-config.php /var/www/html/
 
-# COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
-
-# COPY apache2-foreground /usr/local/bin/
-# WORKDIR /var/www/html
-
-# EXPOSE 8090
-# CMD ["apache2-foreground"]
