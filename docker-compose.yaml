@@ -28,8 +28,8 @@ services:
     volumes:
       - ./wordpress_data:/var/www/html
       - ${PWD}/wp-config.php:/var/www/html/wp-config.php
-    ports:
-      - "8001:80"
+    # ports:
+    #   - "8001:80" # we dont need to publish this port, because it will automatically expose container port in ip container
     restart: always
     environment:
       WORDPRESS_DB_HOST: db
@@ -39,7 +39,7 @@ services:
     networks:
       backend:
       dockervlan:
-        ipv4_address: "10.55.254.33"
+        ipv4_address: "10.55.254.33" # ip address static for container wordpress
 
   phpmyadmin:
     depends_on:
@@ -48,7 +48,7 @@ services:
     container_name: pma
     restart: always
     ports:
-      - "8011:80"
+      - "8011:80" # need define this port to expose pma in dockerhost
     environment:
       PMA_HOST: db
       MYSQL_ROOT_PASSWORD: somewordpress
@@ -63,7 +63,7 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
-    # ports:
+    # ports: # this is optional to expose redis
     #   - "6379:6379"
     entrypoint: redis-server --maxmemory 512mb
     networks:
@@ -85,5 +85,5 @@ networks:
     ipam:
       config:
         - subnet: "10.55.254.0/24" # prefix network in your lan
-          ip_range: "10.55.254.32/27" # ip address usage to expose wordpress in public 
+          ip_range: "10.55.254.32/27" # ip address pool available for container will be join in macvlan network 
           gateway: "10.55.254.254" # gateway network in your lan
