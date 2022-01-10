@@ -29,7 +29,7 @@ services:
       - ./wordpress_data:/var/www/html
       - ${PWD}/wp-config.php:/var/www/html/wp-config.php
     # ports:
-    #   - "8001:80" # we dont need to publish this port, because it will automatically expose container port in ip container
+    #   - "8001:80" # we dont need to publish this port, because it will automatically expose container port with ip container
     restart: always
     environment:
       WORDPRESS_DB_HOST: db
