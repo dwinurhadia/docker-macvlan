@@ -163,3 +163,7 @@ OK
 1641655513.266122 [0 192.168.128.5:43580] "GET" "ddbffb3cd0a6494208e15c7faebb6f503cdb84aawp:transient:doing_cron"
 1641655513.266992 [0 192.168.128.5:43580] "GET" "ddbffb3cd0a6494208e15c7faebb6f503cdb84aawp:site-transient:update_plugins"
 1641655513.267380 [0 192.168.128.5:43580] "GET" "ddbffb3cd0a6494208e15c7faebb6f503cdb84aawp:site-transient:update_themes"
+
+
+# referensi redis
+https://support.pagely.com/hc/en-us/articles/360015193272-Manually-Configuring-the-Redis-Object-Cache-Plugin-for-WordPress
