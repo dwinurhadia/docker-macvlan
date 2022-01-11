@@ -26,6 +26,7 @@ services:
       - db
       - redis
     volumes:
+      - ./php_custom:/usr/local/etc/php/conf.d
       - ./wordpress_data:/var/www/html
       - ${PWD}/wp-config.php:/var/www/html/wp-config.php
     # ports:
@@ -72,6 +73,7 @@ services:
 volumes:
   db_data: {}
   wordpress_data: {}
+  php_custom: {}
 
 networks:
   backend:
