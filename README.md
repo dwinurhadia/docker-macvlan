@@ -35,3 +35,7 @@ Wait for a few min then open your ip address wordpress container in browser
 To open phpmyadmin, please open docker host ip and port expose by phpmyadmin
 
     ex: http://10.55.254.126:8011
+
+## Custom php module
+
+To add custom php config just put your config .ini in `php_custom` folder
